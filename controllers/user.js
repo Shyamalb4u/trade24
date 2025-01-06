@@ -20,7 +20,7 @@ exports.signup = async (req, res, next) => {
       .input("Email", mail)
       .input("ip", ips)
       .execute("registration");
-    console.log(result.recordset);
+    //console.log(result.recordset);
     //console.log(result.recordset[0].uid);
     if (result.recordset[0].uid === "MAIL") {
       res.status(404).json({ data: "Duplicate Mail" });
