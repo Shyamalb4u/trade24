@@ -46,6 +46,19 @@ exports.getUser = (req, res, next) => {
       throw err;
     });
 };
+exports.getMail = (req, res, next) => {
+  const uid = req.params.mail;
+  console.log(uid);
+  new sql.Request()
+    .input("mail", uid)
+    .execute("getMail")
+    .then((result) => {
+      res.status(200).json({ data: result.recordset });
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 exports.getall = (req, res, next) => {
   new sql.Request()
     .execute("getAll")
