@@ -40,6 +40,7 @@ exports.getUser = (req, res, next) => {
     .input("id", uid)
     .execute("getUserProfile")
     .then((result) => {
+      console.log(result.recordset[0].length);
       if (result.recordset[0].length > 0) {
         res.status(200).json({ data: result.recordset });
       } else {
