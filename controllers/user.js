@@ -23,9 +23,9 @@ exports.signup = async (req, res, next) => {
     //console.log(result.recordset);
     //console.log(result.recordset[0].uid);
     if (result.recordset[0].uid === "MAIL") {
-      res.status(404).json({ data: "Duplicate Mail" });
+      res.status(404).json({ data: result.recordset[0].uid });
     } else if (result.recordset[0].uid === "INTRO") {
-      res.status(404).json({ data: "Wrong Sponsor ID" });
+      res.status(404).json({ data: result.recordset[0].uid });
     } else {
       res.status(200).json({ data: result.recordset });
     }
