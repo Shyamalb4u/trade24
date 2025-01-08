@@ -25,7 +25,7 @@ exports.signup = async (req, res, next) => {
     if (result.recordset[0].uid === "MAIL") {
       res.status(404).json({ data: result.recordset[0].uid });
     } else if (result.recordset[0].uid === "INTRO") {
-      res.status(404).json({ data: result.recordset[0].uid });
+      res.status(404).json({ data: "Sponsor Not Exists" });
     } else {
       res.status(200).json({ data: result.recordset });
     }
