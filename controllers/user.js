@@ -59,7 +59,11 @@ exports.getMail = (req, res, next) => {
     .input("mail", uid)
     .execute("getMail")
     .then((result) => {
-      res.status(200).json({ data: result.recordset });
+      if (result.recordset[0]) {
+        res.status(200).json({ data: result.recordset });
+      } else {
+        res.status(404).json({ data: "No Data" });
+      }
     })
     .catch((err) => {
       throw err;
