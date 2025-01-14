@@ -79,3 +79,20 @@ exports.getall = (req, res, next) => {
       throw err;
     });
 };
+exports.getDirect = (req, res, next) => {
+  const uid = req.params.uid;
+  console.log(uid);
+  new sql.Request()
+    .input("uid", uid)
+    .execute("getDirect")
+    .then((result) => {
+      if (result.recordset[0]) {
+        res.status(200).json({ data: result.recordset });
+      } else {
+        res.status(404).json({ data: "No Data" });
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
