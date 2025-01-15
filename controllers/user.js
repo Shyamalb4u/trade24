@@ -86,11 +86,12 @@ exports.getDirect = (req, res, next) => {
     .input("uid", uid)
     .execute("getDirect")
     .then((result) => {
-      if (result.recordset[0]) {
-        res.status(200).json({ data: result.recordset });
-      } else {
-        res.status(404).json({ data: "No Data" });
-      }
+      res.status(200).json({ data: result.recordset });
+      // if (result.recordset[0]) {
+      //   res.status(200).json({ data: result.recordset });
+      // } else {
+      //   res.status(404).json({ data: "No Data" });
+      // }
     })
     .catch((err) => {
       throw err;
