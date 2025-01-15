@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/getUser/:id", userController.getUser);
 router.get("/getMail/:mail", userController.getMail);
 router.get("/getDirecr/:uid", userController.getDirect);
+router.get("/getDirectSummery/:uid", userController.getDirectSummery);
 router.get("/getall", userController.getall);
 router.post("/signup", userController.signup);
 // router.post("/touchtap/:id/:score", userController.handleTouchTap);
