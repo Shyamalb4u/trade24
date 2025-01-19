@@ -9,6 +9,8 @@ router.get("/getDirecr/:uid", userController.getDirect);
 router.get("/getDirectSummery/:uid", userController.getDirectSummery);
 router.get("/getall", userController.getall);
 router.post("/signup", userController.signup);
+router.get("/getBank", userController.getBank);
+router.post("/setBank", userController.bankUpdate);
 // router.post("/touchtap/:id/:score", userController.handleTouchTap);
 
 module.exports = router;

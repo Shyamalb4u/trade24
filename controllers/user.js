@@ -110,3 +110,41 @@ exports.getDirectSummery = (req, res, next) => {
       throw err;
     });
 };
+exports.bankUpdate = async (req, res, next) => {
+  const mail = req.body.mail;
+  const fname = req.body.fname;
+  const accNo = req.body.accNo;
+  const bank = req.body.bank;
+  const branch = req.body.branch;
+  const ifsc = req.body.ifsc;
+  try {
+    const result = await new sql.Request()
+      .input("mail", mail)
+      .input("acName", fname)
+      .input("acNo", accNo)
+      .input("bank", bank)
+      .input("branch", branch)
+      .input("ifsc", ifsc)
+      .execute("setBank");
+    res.status(200).json({ data: "Updated" });
+  } catch (err) {
+    throw err;
+  }
+};
+exports.getBank = (req, res, next) => {
+  const uid = req.params.mail;
+  console.log(uid);
+  new sql.Request()
+    .input("mail", uid)
+    .execute("getBank")
+    .then((result) => {
+      if (result.recordset[0]) {
+        res.status(200).json({ data: result.recordset });
+      } else {
+        res.status(404).json({ data: "No Data" });
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
