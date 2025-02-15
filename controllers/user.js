@@ -181,3 +181,20 @@ exports.getFundRequest = (req, res, next) => {
       throw err;
     });
 };
+exports.getFundBalance = (req, res, next) => {
+  const uid = req.params.mail;
+  console.log(uid);
+  new sql.Request()
+    .input("mail", uid)
+    .execute("getFundBalance")
+    .then((result) => {
+      if (result.recordset[0]) {
+        res.status(200).json({ data: result.recordset });
+      } else {
+        res.status(404).json({ data: "No Data" });
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
