@@ -229,3 +229,19 @@ exports.getMyPackages = (req, res, next) => {
       throw err;
     });
 };
+exports.getExpDate = (req, res, next) => {
+  const uid = req.params.mail;
+  new sql.Request()
+    .input("mail", uid)
+    .execute("getExpDate_status")
+    .then((result) => {
+      if (result.recordset[0]) {
+        res.status(200).json({ data: result.recordset });
+      } else {
+        res.status(404).json({ data: "No Data" });
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+};

@@ -13,6 +13,7 @@ router.get("/getBank/:mail", userController.getBank);
 router.get("/getFundRequest/:mail", userController.getFundRequest);
 router.get("/getFundBalance/:mail", userController.getFundBalance);
 router.get("/getMyPackage/:mail", userController.getMyPackages);
+router.get("/getExpDate/:mail", userController.getExpDate);
 router.post("/setBank", userController.bankUpdate);
 router.post("/fundRequest", userController.fundRequest);
 router.post("/topup", userController.topup);
