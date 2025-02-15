@@ -140,7 +140,7 @@ exports.fundRequest = async (req, res, next) => {
       .input("mail", mail)
       .input("txn", txn)
       .input("amount", amt)
-      .execute("setBank");
+      .execute("SP_add_fund");
     res.status(200).json({ data: "Updated" });
   } catch (err) {
     throw err;
