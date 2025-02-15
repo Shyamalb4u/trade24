@@ -131,6 +131,21 @@ exports.bankUpdate = async (req, res, next) => {
     throw err;
   }
 };
+exports.fundRequest = async (req, res, next) => {
+  const mail = req.body.mail;
+  const txn = req.body.txn;
+  const amt = req.body.amount;
+  try {
+    const result = await new sql.Request()
+      .input("mail", mail)
+      .input("txn", txn)
+      .input("amount", amt)
+      .execute("setBank");
+    res.status(200).json({ data: "Updated" });
+  } catch (err) {
+    throw err;
+  }
+};
 exports.getBank = (req, res, next) => {
   const uid = req.params.mail;
   console.log(uid);

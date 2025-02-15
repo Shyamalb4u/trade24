@@ -11,6 +11,6 @@ router.get("/getall", userController.getall);
 router.post("/signup", userController.signup);
 router.get("/getBank/:mail", userController.getBank);
 router.post("/setBank", userController.bankUpdate);
-// router.post("/touchtap/:id/:score", userController.handleTouchTap);
+router.post("/fundRequest", userController.fundRequest);
 
 module.exports = router;
