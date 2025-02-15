@@ -14,5 +14,6 @@ router.get("/getFundRequest/:mail", userController.getFundRequest);
 router.get("/getFundBalance/:mail", userController.getFundBalance);
 router.post("/setBank", userController.bankUpdate);
 router.post("/fundRequest", userController.fundRequest);
+router.post("/topup", userController.topup);
 
 module.exports = router;

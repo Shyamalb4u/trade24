@@ -146,6 +146,21 @@ exports.fundRequest = async (req, res, next) => {
     throw err;
   }
 };
+exports.topup = async (req, res, next) => {
+  const mail = req.body.mail;
+  const amt = req.body.amt;
+  const dur = req.body.dur;
+  try {
+    const result = await new sql.Request()
+      .input("mail", mail)
+      .input("amt", amt)
+      .input("dur", dur)
+      .execute("SP_Activation");
+    res.status(200).json({ data: "Updated" });
+  } catch (err) {
+    throw err;
+  }
+};
 exports.getBank = (req, res, next) => {
   const uid = req.params.mail;
   console.log(uid);
