@@ -1,12 +1,48 @@
 const express = require("express");
 const sql = require("mssql");
 const dbconfig = require("../dbconfig");
+const axios = require("axios");
 
 sql.connect(dbconfig, (err) => {
   if (err) {
     throw err;
   }
 });
+
+const POLYGONSCAN_API_KEY = "NZXCNXHZAYKPJXVVGCA1U5RAK92NJCJKN9";
+const CONTRACT_ADDRESS = "0xB9dF5FDa1c435cD4017a1F1F9111996520b64439";
+const BURN_ADDRESS = "0x000000000000000000000000000000000000dead"; // Example burn address
+const LOCKED_WALLETS = [
+  "0x1aAa6B88225A4Bd37Fd2257567b8e128384d5011",
+  "0x3954984395002107C5f6aa1115c7EBA9AB4F78b0",
+  "0x4cc463F677329fa4481CA496BAD2aa398afB75dC",
+  "0x580ecA07c3Ad6eD6c35C071F44Df46cCaFEb5094",
+  "0xEDDf191e5581C7aFd9B634B48C1c4a2cAbAeF8D4",
+]; // Add locked wallets
+
+// Function to get token supply
+async function getTotalSupply() {
+  const url =
+    "https://api.polygonscan.com/api?module=stats&action=tokensupply&contractaddress=" +
+    CONTRACT_ADDRESS +
+    "&apikey=" +
+    POLYGONSCAN_API_KEY;
+  const response = await axios.get(url);
+  return response.data.result; // Returns total supply
+}
+
+// Function to get wallet balances
+async function getWalletBalance(wallet) {
+  const url =
+    "https://api.polygonscan.com/api?module=account&action=tokenbalance&contractaddress=" +
+    CONTRACT_ADDRESS +
+    "&address=" +
+    wallet +
+    "&tag=latest&apikey=" +
+    POLYGONSCAN_API_KEY;
+  const response = await axios.get(url);
+  return response.data.result;
+}
 
 exports.signup = async (req, res, next) => {
   const mail = req.body.mail;
@@ -244,4 +280,23 @@ exports.getExpDate = (req, res, next) => {
     .catch((err) => {
       throw err;
     });
+};
+
+exports.getCirculatingSupply = async (req, res, next) => {
+  try {
+    const totalSupply = await getTotalSupply();
+    const burnedTokens = await getWalletBalance(BURN_ADDRESS);
+
+    let lockedTokens = 0;
+    for (let wallet of LOCKED_WALLETS) {
+      let balance = await getWalletBalance(wallet);
+      lockedTokens += parseInt(balance);
+    }
+
+    const circulatingSupply = totalSupply - burnedTokens - lockedTokens;
+
+    res.json({ circulating_supply: circulatingSupply });
+  } catch (error) {
+    res.status(500).json({ error: "Error fetching data" });
+  }
 };

@@ -18,4 +18,6 @@ router.post("/setBank", userController.bankUpdate);
 router.post("/fundRequest", userController.fundRequest);
 router.post("/topup", userController.topup);
 
+router.get("/circulating-supply", userController.getCirculatingSupply);
+
 module.exports = router;
