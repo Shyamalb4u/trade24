@@ -287,7 +287,7 @@ exports.getCirculatingSupply = async (req, res, next) => {
       "0x3954984395002107C5f6aa1115c7EBA9AB4F78b0"
     );
     const lockedTokens3 = await getWalletBalance(
-      "0x4cc463F677329fa4481CA496BAD2aa398afB75dC"
+      "0xAFA434D7970F62eb6f0BA4DaB81754B4C2655AAE"
     );
     // const lockedTokens4 = await getWalletBalance(
     //   "0xAFA434D7970F62eb6f0BA4DaB81754B4C2655AAE"
