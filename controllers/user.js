@@ -284,16 +284,10 @@ exports.getCirculatingSupply = async (req, res, next) => {
       "0x1aAa6B88225A4Bd37Fd2257567b8e128384d5011"
     );
     const lockedTokens2 = await getWalletBalance(
-      "0x3954984395002107C5f6aa1115c7EBA9AB4F78b0"
+      "0xEDDf191e5581C7aFd9B634B48C1c4a2cAbAeF8D4"
     );
     const lockedTokens3 = await getWalletBalance(
-      "0xAFA434D7970F62eb6f0BA4DaB81754B4C2655AAE"
-    );
-    // const lockedTokens4 = await getWalletBalance(
-    //   "0xAFA434D7970F62eb6f0BA4DaB81754B4C2655AAE"
-    // );
-    const lockedTokens5 = await getWalletBalance(
-      "0xEDDf191e5581C7aFd9B634B48C1c4a2cAbAeF8D4"
+      "0x580ecA07c3Ad6eD6c35C071F44Df46cCaFEb5094"
     );
 
     // let lockedTokens = 0;
@@ -308,8 +302,7 @@ exports.getCirculatingSupply = async (req, res, next) => {
       burnedTokens -
       lockedTokens1 -
       lockedTokens2 -
-      lockedTokens3 -
-      lockedTokens5;
+      lockedTokens3 * 4;
     res.json({ circulating_supply: circulatingSupply });
   } catch (error) {
     res.status(500).json({ error: "Error fetching data" });
