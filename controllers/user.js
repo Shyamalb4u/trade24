@@ -292,8 +292,8 @@ exports.getCirculatingSupply = async (req, res, next) => {
       let balance = await getWalletBalance(wallet);
       lockedTokens += parseInt(balance);
     }
-
-    const circulatingSupply = totalSupply - burnedTokens - lockedTokens;
+    //const circulatingSupply = totalSupply - burnedTokens - lockedTokens;
+    const circulatingSupply = totalSupply;
 
     res.json({ circulating_supply: circulatingSupply });
   } catch (error) {
