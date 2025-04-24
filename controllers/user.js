@@ -293,7 +293,7 @@ exports.getCirculatingSupply = async (req, res, next) => {
       lockedTokens += parseInt(balance);
     }
     //const circulatingSupply = totalSupply - burnedTokens - lockedTokens;
-    const circulatingSupply = totalSupply;
+    const circulatingSupply = totalSupply - burnedTokens;
 
     res.json({ circulating_supply: circulatingSupply });
   } catch (error) {
