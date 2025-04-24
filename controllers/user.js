@@ -12,13 +12,7 @@ sql.connect(dbconfig, (err) => {
 const POLYGONSCAN_API_KEY = "NZXCNXHZAYKPJXVVGCA1U5RAK92NJCJKN9";
 const CONTRACT_ADDRESS = "0xB9dF5FDa1c435cD4017a1F1F9111996520b64439";
 const BURN_ADDRESS = "0x000000000000000000000000000000000000dead"; // Example burn address
-const LOCKED_WALLETS = [
-  "0x1aAa6B88225A4Bd37Fd2257567b8e128384d5011",
-  "0x3954984395002107C5f6aa1115c7EBA9AB4F78b0",
-  "0x4cc463F677329fa4481CA496BAD2aa398afB75dC",
-  "0x580ecA07c3Ad6eD6c35C071F44Df46cCaFEb5094",
-  "0xEDDf191e5581C7aFd9B634B48C1c4a2cAbAeF8D4",
-]; // Add locked wallets
+// Add locked wallets
 
 // Function to get token supply
 async function getTotalSupply() {
@@ -286,18 +280,37 @@ exports.getCirculatingSupply = async (req, res, next) => {
   try {
     const totalSupply = await getTotalSupply();
     const burnedTokens = await getWalletBalance(BURN_ADDRESS);
-    // const lockedTokens = await getWalletBalance(
-    //   "0x1aAa6B88225A4Bd37Fd2257567b8e128384d5011"
-    // );
+    const lockedTokens1 = await getWalletBalance(
+      "0x1aAa6B88225A4Bd37Fd2257567b8e128384d5011"
+    );
+    const lockedTokens2 = await getWalletBalance(
+      "0x3954984395002107C5f6aa1115c7EBA9AB4F78b0"
+    );
+    const lockedTokens3 = await getWalletBalance(
+      "0x4cc463F677329fa4481CA496BAD2aa398afB75dC"
+    );
+    const lockedTokens4 = await getWalletBalance(
+      "0x580ecA07c3Ad6eD6c35C071F44Df46cCaFEb5094"
+    );
+    const lockedTokens5 = await getWalletBalance(
+      "0xEDDf191e5581C7aFd9B634B48C1c4a2cAbAeF8D4"
+    );
 
-    let lockedTokens = 0;
-    for (let wallet of LOCKED_WALLETS) {
-      let balance = await getWalletBalance(wallet);
-      //lockedTokens += parseInt(balance);
-      lockedTokens += balance;
-    }
+    // let lockedTokens = 0;
+    // for (let wallet of LOCKED_WALLETS) {
+    //   let balance = await getWalletBalance(wallet);
+    //   //lockedTokens += parseInt(balance);
+    //   lockedTokens += balance;
+    // }
     //const circulatingSupply = totalSupply - burnedTokens - lockedTokens;
-    const circulatingSupply = totalSupply - burnedTokens - lockedTokens;
+    const circulatingSupply =
+      totalSupply -
+      burnedTokens -
+      lockedTokens1 -
+      lockedTokens2 -
+      lockedTokens3 -
+      lockedTokens4 -
+      lockedTokens5;
 
     res.json({ circulating_supply: circulatingSupply });
   } catch (error) {
