@@ -196,7 +196,7 @@ exports.insertPromo = async (req, res, next) => {
   const dur = req.params.dur;
   try {
     const result = await new sql.Request()
-      .input("id", mail)
+      .input("id", uid)
       .input("dur", dur)
       .execute("insert_promo");
     res.status(200).json({ data: "Updated" });
