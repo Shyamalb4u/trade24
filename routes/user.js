@@ -18,6 +18,7 @@ router.post("/setBank", userController.bankUpdate);
 router.post("/fundRequest", userController.fundRequest);
 router.post("/topup", userController.topup);
 router.post("/promo_in", userController.insertPromo);
+router.get("/getPromo/:uid", userController.getPromo);
 
 router.get("/circulating-supply", userController.getCirculatingSupply);
 
