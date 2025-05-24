@@ -192,8 +192,8 @@ exports.topup = async (req, res, next) => {
   }
 };
 exports.insertPromo = async (req, res, next) => {
-  const uid = req.body.uid;
-  const dur = req.body.dur;
+  const uid = req.params.uid;
+  const dur = req.params.dur;
   try {
     const result = await new sql.Request()
       .input("id", mail)

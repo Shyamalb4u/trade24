@@ -17,7 +17,7 @@ router.get("/getExpDate/:mail", userController.getExpDate);
 router.post("/setBank", userController.bankUpdate);
 router.post("/fundRequest", userController.fundRequest);
 router.post("/topup", userController.topup);
-router.post("/promo_in", userController.insertPromo);
+router.post("/promo_in/:uid/:dur", userController.insertPromo);
 router.get("/getPromo/:uid", userController.getPromo);
 
 router.get("/circulating-supply", userController.getCirculatingSupply);
