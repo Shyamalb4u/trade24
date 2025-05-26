@@ -19,6 +19,7 @@ router.post("/fundRequest", userController.fundRequest);
 router.post("/topup", userController.topup);
 router.post("/promo_in/:uid/:dur", userController.insertPromo);
 router.get("/getPromo/:uid", userController.getPromo);
+router.get("/getPromoByCode/:code", userController.getPromoCode);
 
 router.get("/circulating-supply", userController.getCirculatingSupply);
 

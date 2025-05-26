@@ -221,6 +221,22 @@ exports.getPromo = (req, res, next) => {
       throw err;
     });
 };
+exports.getPromoCode = (req, res, next) => {
+  const code = req.params.code;
+  new sql.Request()
+    .input("code", code)
+    .execute("get_promoCode")
+    .then((result) => {
+      if (result.recordset[0]) {
+        res.status(200).json({ data: result.recordset });
+      } else {
+        res.status(404).json({ data: "No Data" });
+      }
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
 exports.getBank = (req, res, next) => {
   const uid = req.params.mail;
   console.log(uid);
