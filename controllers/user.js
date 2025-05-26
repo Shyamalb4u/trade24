@@ -191,6 +191,19 @@ exports.topup = async (req, res, next) => {
     throw err;
   }
 };
+exports.topupPromo = async (req, res, next) => {
+  const mail = req.body.mail;
+  const promo = req.body.promo;
+  try {
+    const result = await new sql.Request()
+      .input("mail", mail)
+      .input("promo", promo)
+      .execute("SP_Activation_promo");
+    res.status(200).json({ data: "Updated" });
+  } catch (err) {
+    throw err;
+  }
+};
 exports.insertPromo = async (req, res, next) => {
   const uid = req.params.uid;
   const dur = req.params.dur;
