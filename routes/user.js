@@ -11,6 +11,7 @@ router.get("/getall", userController.getall);
 router.post("/signup", userController.signup);
 router.get("/getBank/:mail", userController.getBank);
 router.get("/getFundRequest/:mail", userController.getFundRequest);
+router.get("/getFundStatement/:mail", userController.getFundStatement);
 router.get("/getFundBalance/:mail", userController.getFundBalance);
 router.get("/getMyPackage/:mail", userController.getMyPackages);
 router.get("/getExpDate/:mail", userController.getExpDate);
